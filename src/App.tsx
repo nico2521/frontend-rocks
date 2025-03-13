@@ -1,38 +1,82 @@
-import { useState } from "react";
+interface PokemonCard{
+  id: number;
+  image: string;
+  name: string;
+  types: string[];
+}
+const data= [
+  {
+    id: 1,
+    name: "Geudude",
+    image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png ",
+    types: ["fire", "water"],
+  },
+
+  {
+  id: 2,
+  name: "PIKACHU",
+  image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png ",
+  types: ["elettric"],
+},
+{
+id: 3,
+  name: "BUBS",
+  image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png ",
+  types: ["fire", "water"],
+},
+{
+id: 4,
+  name: "BUBS",
+  image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png ",
+  types: ["fire", "water"],
+},
+{
+id: 5,
+  name: "SQUITRLE",
+  image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png ",
+  types: ["fire", "water"],
+},
+{
+  id: 6,
+    name: "CHARMANDER",
+    image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png ",
+    types: ["fire", "poison"],
+  },
+];
+const typeC: { [key: string]: string} = {
+  fire: "bg-red-300",
+  water: "bg-blue-300",
+  elettric: "bg-yellow-300",
+  poison: "bg-purple-300",
+};
+
+function getTypeColor(type: string){
+  const color= typeC[type];
+  return color;
+}
+
 
 export const App = () => {
-  const [count, setCount] = useState(0);
-  const [title, setTitle] = useState("geodude");
+  return <div>
+    <div className= "flex flex-wrap bg-blue-200 ">
+      {data.map((item, idx)=>{
+   return (
+    <div>
+      {item.id} - {item.name} 
+      <img src={item.image}/>
 
-  return (
-    <div className="h-dvh flex flex-col items-center justify-center">
-      <div className="bg-white p-8 rounded-md shadow-lg">
-        <h1 className="text-center font-bold text-3xl text-blue-400 mb-4">
-          {title}
-        </h1>
-
-        <h2 className="text-center font-bold text-xl mb-6">Vite + React</h2>
-
-        <div className="flex flex-col items-center space-y-4">
-          <button
-            className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-md cursor-pointer hover:bg-blue-600 transition-colors"
-            onClick={() => setCount((count) => count + 1)}
-          >
-            Hai premuto il pulsante {count} {count === 1 ? "volta" : "volte"}
-          </button>
-
-          <button
-              className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-md cursor-pointer hover:bg-blue-600 transition-colors"
-              onClick={() => setTitle("Charizard")}
-          >
-            Cambia
-          </button>
-
-          <p className="text-center">
-            Modifica <code>src/App.tsx</code> e salva per testare l'hot reload
-          </p>
-        </div>
+      <div className="flex flex-row gap-3 p-3">
+      {item.types.map((type)=>{
+          return(<div className={`p-1 mx-3 ${getTypeColor(type)}`}>{type}</div>)
+      })}
       </div>
+      </div>
+   );
+      })}
     </div>
-  );
+  </div>
+};
+
+export const Detail = () => {
+  return null
 }
